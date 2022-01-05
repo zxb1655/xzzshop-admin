@@ -19,6 +19,7 @@
             </el-button>
           </el-form-item>
         </el-form>
+        <p class="foottip"><span>用户名：xzzshop</span> <span>密码：xzzshop</span></p>
       </div>
     </div>
   </div>
@@ -153,6 +154,11 @@ export default {
   line-height: 40px;
   text-align: center;
   margin-bottom: 30px;
+}
+.login-box .body .foottip {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .login-box .body .author {
