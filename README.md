@@ -1,22 +1,18 @@
 ### 猪猪小店，开源微信商城（后台管理端 VUE）
 
-- 基于开源项目 NideShop 和海风小店重建，项目特别好就是时间有点久，很多的小问题，精简了一些功能的同时完善修复了一些 bug，
-  并重新设计了 UI
+- 基于开源项目 NideShop 和海风小店重建，项目的时间都有点久，有一些小问题，精简了一些功能的同时完善修复了一些 bug，并重新
+  设计了 UI
 - 服务端 api 基于 Node.js+ThinkJS+MySQL
 - 后台管理 基于 VUE.js+element-ui
 
 ### 目前猪猪小店已经上线，可以扫码测试看看
 
-<img width="200" src="./gitImg/wei.jpeg"/>
+<img width="300" src="./gitImg/wei.jpeg"/>
 
 #### 本项目需要配合
 
 服务端： https://github.com/zxb1655/xzzshop-server  
 微信小程序：https://github.com/zxb1655/xzzshop-miniprogram
-
-线上 demo：http://shopadmin.zxb66.top/  
-用户名：zxb1655  
-密码：zxb1655
 
 ### 项目截图
 
@@ -60,21 +56,18 @@ git clone https://github.com/zxb1655/xzzshop-admin
 
 ```
 yarn install
-
 ```
 
 - 启动
 
 ```
 npm run serve
-
 ```
 
 - build 打包成静态文件
 
 ```
 npm run build 或者 npm run build:test
-
 ```
 
 生成的静态文件在 dist 的 web 文件夹中，上传到服务器就可以在浏览器中打开了。
@@ -89,10 +82,11 @@ npm run build 或者 npm run build:test
 
 ### 最后说明
 
-- 项目地址  
+- 项目地址
+
   后台管理：https://github.com/zxb1655/xzzshop-admin  
   服务端： https://github.com/zxb1655/xzzshop-server  
   微信小程序：https://github.com/zxb1655/xzzshop-miniprogram
 
-- 本项目会持续更新和维护，喜欢别忘了 Star，有问题可通过微信、QQ 群联系我，谢谢您的关注。
-  <img width="200" src="./gitImg/xzz.jpeg"/>
+- 本项目会持续更新和维护，有问题可通过微信联系我，喜欢别忘了 Star 一下哦，谢谢您的关注。
+  <img width="300" src="./gitImg/xzz.jpeg"/>
