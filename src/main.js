@@ -17,7 +17,6 @@ Vue.use(VueAxios, Axios)
 router.beforeEach((to, from, next) => {
   let token = localStorage.getItem('token') || ''
   //配置接口信息
-  // Axios.defaults.baseURL = 'http://www.地址.com:8360/admin/';
   Axios.defaults.baseURL = api.rootUrl
   console.log(Axios.defaults.headers)
   Axios.defaults.headers.common['x-xzzshop-token'] = token

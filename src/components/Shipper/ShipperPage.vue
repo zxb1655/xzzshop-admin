@@ -52,7 +52,7 @@
               <el-table-column prop="CustomerName" label="客户编号"></el-table-column>
               <el-table-column prop="MonthCode" label="月结账号"></el-table-column>
               <el-table-column label="操作" width="170">
-                <template scope="scope">
+                <template slot-scope="scope">
                   <el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">编辑 </el-button>
                 </template>
               </el-table-column>
@@ -89,7 +89,6 @@ export default {
   },
   methods: {
     getAllRegion() {
-      let that = this
       this.axios.get('order/getAllRegion').then(response => {
         this.options = response.data.data
       })

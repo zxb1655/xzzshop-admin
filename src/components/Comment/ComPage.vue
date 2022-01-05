@@ -29,7 +29,7 @@
           <el-table-column prop="content" label="评论内容"></el-table-column>
           <el-table-column prop="goods_id" label="关联商品"></el-table-column>
           <el-table-column prop="sort_order" label="排序" width="100" sortable>
-            <template scope="scope">
+            <template slot-scope="scope">
               <el-input
                 v-model="scope.row.sort_order"
                 placeholder="排序"
@@ -38,12 +38,12 @@
             </template>
           </el-table-column>
           <el-table-column prop="enabled" label="状态" width="80px">
-            <template scope="scope">
+            <template slot-scope="scope">
               {{ scope.row.enabled == 1 ? '启用' : '禁用' }}
             </template>
           </el-table-column>
           <el-table-column label="开启状态" width="80">
-            <template scope="scope">
+            <template slot-scope="scope">
               <el-switch
                 v-model="scope.row.enabled"
                 active-text=""
@@ -54,7 +54,7 @@
             </template>
           </el-table-column>
           <el-table-column label="操作" width="170">
-            <template scope="scope">
+            <template slot-scope="scope">
               <el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">编辑</el-button>
               <el-button size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">删除</el-button>
             </template>

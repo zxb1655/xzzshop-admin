@@ -7,7 +7,7 @@
     </div>
     <div class="content-main clearfix">
       <div class="notice">
-        <div class="l">吉风小店毕业设计演示后台！</div>
+        <div class="l">猪猪小店毕业设计演示后台！</div>
       </div>
       <div class="header clearfix">
         <el-card class="box-card card-red">
@@ -30,12 +30,7 @@
         </el-card>
       </div>
       <div class="main">
-        <el-tabs
-          class="o-tab"
-          v-model="activeName2"
-          type="card"
-          @tab-click="handleClick"
-        >
+        <el-tabs class="o-tab" v-model="activeName2" type="card" @tab-click="handleClick">
           <el-tab-pane label="今天" name="first"></el-tab-pane>
           <el-tab-pane label="昨天" name="second"></el-tab-pane>
           <el-tab-pane label="最近7天" name="third"></el-tab-pane>
@@ -46,60 +41,26 @@
             <div slot="header" class="clearfix">
               <span style="line-height: 36px">顾客</span>
               <el-popover placement="right" v-model="related_pop">
-                <el-tabs
-                  class="user-tab"
-                  v-model="userTab"
-                  type="card"
-                  @tab-click="userTabClick"
-                >
+                <el-tabs class="user-tab" v-model="userTab" type="card" @tab-click="userTabClick">
                   <el-tab-pane label="新增" name="first"></el-tab-pane>
                   <el-tab-pane label="老客户" name="second"></el-tab-pane>
                 </el-tabs>
-                <el-table
-                  :data="userData"
-                  style="width: 100%"
-                  height="550"
-                  border
-                  stripe
-                >
+                <el-table :data="userData" style="width: 100%" height="550" border stripe>
                   <el-table-column label="头像" width="80">
-                    <template scope="scope">
-                      <img
-                        :src="scope.row.avatar"
-                        alt=""
-                        style="width: 50px; height: 50px"
-                      />
+                    <template slot-scope="scope">
+                      <img :src="scope.row.avatar" alt="" style="width: 50px; height: 50px" />
                     </template>
                   </el-table-column>
-                  <el-table-column
-                    prop="nickname"
-                    label="昵称"
-                    width="140"
-                  ></el-table-column>
+                  <el-table-column prop="nickname" label="昵称" width="140"></el-table-column>
                   <el-table-column prop="gender" label="性别" width="50">
-                    <template scope="scope">
-                      {{ scope.row.gender == 2 ? "女" : "男" }}
+                    <template slot-scope="scope">
+                      {{ scope.row.gender == 2 ? '女' : '男' }}
                     </template>
                   </el-table-column>
-                  <el-table-column
-                    prop="register_time"
-                    label="注册时间"
-                    width="170"
-                  >
-                  </el-table-column>
-                  <el-table-column
-                    prop="last_login_time"
-                    label="最近登录"
-                    width="170"
-                  >
-                  </el-table-column>
+                  <el-table-column prop="register_time" label="注册时间" width="170"> </el-table-column>
+                  <el-table-column prop="last_login_time" label="最近登录" width="170"> </el-table-column>
                 </el-table>
-                <el-button
-                  class="float-right"
-                  slot="reference"
-                  size="mini"
-                  type="primary"
-                  @click="seeClick"
+                <el-button class="float-right" slot="reference" size="mini" type="primary" @click="seeClick"
                   >查看</el-button
                 >
               </el-popover>
@@ -123,9 +84,7 @@
             </div>
             <div class="text item">
               <span>提交订单数/金额</span>
-              <h3 style="float: right">
-                {{ mainInfo.addOrderNum }} / {{ mainInfo.addOrderSum }}
-              </h3>
+              <h3 style="float: right">{{ mainInfo.addOrderNum }} / {{ mainInfo.addOrderSum }}</h3>
             </div>
           </el-card>
           <el-card class="box-card2">
@@ -157,10 +116,7 @@
             <div class="text item">
               <span>下单转化率</span>
               <p style="float: right">
-                {{
-                  (mainInfo.addOrderNum / (mainInfo.newUser + mainInfo.oldUser))
-                    | numFilter
-                }}
+                {{ (mainInfo.addOrderNum / (mainInfo.newUser + mainInfo.oldUser)) | numFilter }}
               </p>
             </div>
             <p class="tips">下单人数/访问人数</p>
@@ -178,10 +134,7 @@
             <div class="text item">
               <span>支付转化率</span>
               <p style="float: right">
-                {{
-                  (mainInfo.payOrderNum / (mainInfo.newUser + mainInfo.oldUser))
-                    | numFilter
-                }}
+                {{ (mainInfo.payOrderNum / (mainInfo.newUser + mainInfo.oldUser)) | numFilter }}
               </p>
             </div>
             <p class="tips">支付人数/访问人数</p>
@@ -193,96 +146,90 @@
 </template>
 
 <script>
-import Countdown from "./Common/Countdown";
 export default {
   data() {
     return {
       dialogVisible: false,
       infoData: {},
-      activeName2: "first",
-      userTab: "first",
+      activeName2: 'first',
+      userTab: 'first',
       mainInfo: {},
       loginInfo: null,
-      username: "",
-      label: "",
+      username: '',
+      label: '',
       userData: [],
       newData: [],
       oldData: [],
       related_pop: false,
-      resetVision: true,
-    };
+      resetVision: true
+    }
   },
   methods: {
     callback() {
-      this.resetVision = false;
+      this.resetVision = false
     },
     seeClick() {
-      console.log("????");
+      console.log('????')
     },
     getInfo() {
-      this.axios.get("index").then((response) => {
-        this.infoData = response.data.data;
-      });
+      this.axios.get('index').then(response => {
+        this.infoData = response.data.data
+      })
     },
-    handleClick(tab, event) {
-      this.related_pop = false;
-      this.userTab = "first";
-      console.log(tab._data.index);
-      let pindex = tab._data.index;
-      console.log("pindex:" + pindex);
-      this.getMainInfo(pindex);
+    handleClick(tab) {
+      this.related_pop = false
+      this.userTab = 'first'
+      console.log(tab._data.index)
+      let pindex = tab._data.index
+      console.log('pindex:' + pindex)
+      this.getMainInfo(pindex)
     },
-    userTabClick(tab, event) {
-      let pindex = tab._data.index;
-      console.log(pindex);
+    userTabClick(tab) {
+      let pindex = tab._data.index
+      console.log(pindex)
       if (pindex == 0) {
-        this.userData = this.newData;
-        console.log(this.userData);
+        this.userData = this.newData
+        console.log(this.userData)
       } else {
-        this.userData = this.oldData;
-        console.log(this.userData);
+        this.userData = this.oldData
+        console.log(this.userData)
       }
     },
     getMainInfo(index) {
       this.axios
-        .get("index/main", {
+        .get('index/main', {
           params: {
-            pindex: index,
-          },
+            pindex: index
+          }
         })
-        .then((response) => {
-          this.mainInfo = response.data.data;
-          this.newData = response.data.data.newData;
-          this.oldData = response.data.data.oldData;
-          this.userData = this.newData;
-          console.log(this.mainInfo);
-        });
-    },
-  },
-  components: {
-    Countdown,
+        .then(response => {
+          this.mainInfo = response.data.data
+          this.newData = response.data.data.newData
+          this.oldData = response.data.data.oldData
+          this.userData = this.newData
+          console.log(this.mainInfo)
+        })
+    }
   },
   mounted() {
-    this.getInfo();
-    this.getMainInfo(0);
+    this.getInfo()
+    this.getMainInfo(0)
     if (!this.loginInfo) {
-      this.loginInfo = JSON.parse(
-        window.localStorage.getItem("userInfo") || null
-      );
-      this.username = this.loginInfo.username;
+      this.loginInfo = JSON.parse(window.localStorage.getItem('userInfo') || null)
+      this.username = this.loginInfo.username
     }
   },
 
   filters: {
     numFilter(value) {
       if (value) {
-        let realVal = Number(value).toFixed(2);
-        return Number(realVal);
+        let realVal = Number(value).toFixed(2)
+        return Number(realVal)
       }
-      return 0;
-    },
-  },
-};
+      return 0
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -347,7 +294,7 @@ export default {
 .clearfix:before,
 .clearfix:after {
   display: table;
-  content: "";
+  content: '';
 }
 
 .clearfix:after {

@@ -15,23 +15,11 @@
         <el-table :data="tableData" style="width: 100%" border stripe>
           <el-table-column prop="id" label="ID" width="60"></el-table-column>
           <el-table-column prop="username" label="会员名称"></el-table-column>
-          <el-table-column
-            prop="last_login_time"
-            label="最近登录"
-            width="200"
-          ></el-table-column>
-          <el-table-column
-            prop="last_login_ip"
-            label="登录IP"
-            width="200"
-          ></el-table-column>
+          <el-table-column prop="last_login_time" label="最近登录" width="200"></el-table-column>
+          <el-table-column prop="last_login_ip" label="登录IP" width="200"></el-table-column>
           <el-table-column label="操作" width="180">
-            <template scope="scope">
-              <el-button
-                size="small"
-                @click="handleRowEdit(scope.$index, scope.row)"
-                >编辑</el-button
-              >
+            <template slot-scope="scope">
+              <el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">编辑</el-button>
               <el-button
                 v-if="scope.row.id != loginInfo.id"
                 plain
@@ -55,57 +43,54 @@ export default {
       page: 1,
       total: 0,
       filterForm: {
-        username: "",
+        username: ''
       },
       tableData: [],
-      loginInfo: null,
-    };
+      loginInfo: null
+    }
   },
   methods: {
     handleRowEdit(index, row) {
-      this.$router.push({ name: "admin_add", query: { id: row.id } });
+      this.$router.push({ name: 'admin_add', query: { id: row.id } })
     },
     handleRowDelete(index, row) {
-      console.log(row);
-      this.$confirm("确定要删除?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
+      console.log(row)
+      this.$confirm('确定要删除?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       }).then(() => {
-        this.axios.post("admin/deleAdmin", { id: row.id }).then((response) => {
-          console.log(response.data);
+        this.axios.post('admin/deleAdmin', { id: row.id }).then(response => {
+          console.log(response.data)
           if (response.data.errno === 0) {
             this.$message({
-              type: "success",
-              message: "删除成功!",
-            });
-            this.getList();
+              type: 'success',
+              message: '删除成功!'
+            })
+            this.getList()
           }
-        });
-      });
+        })
+      })
     },
     onSubmitFilter() {
-      this.page = 1;
-      this.getList();
+      this.page = 1
+      this.getList()
     },
     getList() {
-      this.axios.get("admin").then((response) => {
-        this.tableData = response.data.data;
-        console.log(this.tableData);
-      });
-    },
+      this.axios.get('admin').then(response => {
+        this.tableData = response.data.data
+        console.log(this.tableData)
+      })
+    }
   },
   components: {},
   mounted() {
-    this.getList();
+    this.getList()
     if (!this.loginInfo) {
-      this.loginInfo = JSON.parse(
-        window.localStorage.getItem("userInfo") || null
-      );
+      this.loginInfo = JSON.parse(window.localStorage.getItem('userInfo') || null)
     }
-  },
-};
+  }
+}
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

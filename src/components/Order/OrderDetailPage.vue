@@ -28,7 +28,7 @@
               <el-table-column prop="user_id" label="用户id" width="70"></el-table-column>
               <el-table-column prop="nickname" label="昵称" width="100"></el-table-column>
               <el-table-column prop="avatar" label="头像" width="80">
-                <template scope="scope">
+                <template slot-scope="scope">
                   <img :src="scope.row.avatar" alt="" style="width: 60px; height: 60px" />
                 </template>
               </el-table-column>
@@ -37,7 +37,7 @@
               <el-table-column prop="address" label="客户地址"></el-table-column>
               <el-table-column prop="postscript" label="买家备注" width="300"></el-table-column>
               <el-table-column label="操作">
-                <template scope="scope">
+                <template slot-scope="scope">
                   <el-button size="small" @click="addressEdit(scope.$index, scope.row)">编辑 </el-button>
                 </template>
               </el-table-column>
@@ -47,7 +47,7 @@
               <el-table-column prop="goods_sn" label="商品SKU" width="120"></el-table-column>
               <el-table-column prop="list_pic_url" label="商品图" width="120"
                 >list_pic_url
-                <template scope="scope">
+                <template slot-scope="scope">
                   <img :src="scope.row.list_pic_url" alt="" style="width: 60px; height: 60px" />
                 </template>
               </el-table-column>
@@ -56,12 +56,12 @@
               <el-table-column prop="retail_price" label="售价" width="100"></el-table-column>
               <el-table-column prop="number" label="购买数量" width="100"></el-table-column>
               <el-table-column label="小计" width="100">
-                <template scope="scope">
+                <template slot-scope="scope">
                   <label>{{ scope.row.retail_price * scope.row.number }}</label>
                 </template>
               </el-table-column>
               <el-table-column label="操作">
-                <template scope="scope">
+                <template slot-scope="scope">
                   <el-button size="small" @click="goodsListEdit(scope.$index, scope.row)">编辑 </el-button>
                   <el-button size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)"
                     >删除
@@ -144,7 +144,7 @@
               <div v-if="on_posting == 1" class="posting">正在查询，请稍候...</div>
 
               <ul class="traces-wrap">
-                <li class="traces-list" v-for="item in expressData.traces">
+                <li class="traces-list" v-for="(item, index) in expressData.traces" :key="index">
                   <div class="traces-time">{{ item.time }}</div>
                   <div class="traces-content">{{ item.status }}</div>
                 </li>
@@ -206,7 +206,7 @@
           <label>{{ goodsData.goods_id }}</label>
         </el-form-item>
         <el-form-item label="商品图:" label-width="120px">
-          <template scope="scope">
+          <template slot-scope="scope">
             <img :src="goodsData.list_pic_url" alt="" style="width: 60px; height: 60px" />
           </template>
         </el-form-item>
@@ -315,15 +315,13 @@ export default {
       this.statusVisible = true
     },
     statusConfirm() {
-      this.axios
-        .post('order/changeStatus', { status: this.statusValue, orderSn: this.infoForm.order_sn })
-        .then(response => {
-          //                    console.log(response.data);
-          this.getInfo()
-          this.statusVisible = false
-        })
+      this.axios.post('order/changeStatus', { status: this.statusValue, orderSn: this.infoForm.order_sn }).then(() => {
+        //                    console.log(response.data);
+        this.getInfo()
+        this.statusVisible = false
+      })
     },
-    handleClick(tab, event) {
+    handleClick(tab) {
       let pindex = tab._data.index
       if (pindex == 1) {
         if (this.is_finish == 0) {
@@ -344,7 +342,7 @@ export default {
             orderSn: this.infoForm.order_sn
           }
         })
-        .then(response => {
+        .then(() => {
           this.dialogVisible = false
           this.addressData = []
           this.getInfo()
@@ -401,7 +399,7 @@ export default {
         }
         this.goodsData.number = number
         this.goodsData.addOrMinus = addOrMinus
-        this.axios.post('order/saveGoodsList', this.goodsData).then(response => {
+        this.axios.post('order/saveGoodsList', this.goodsData).then(() => {
           //                        console.log(response.data);
           //                        this.dialogGoodsListVisible = false;
           //                        this.infoForm.order_sn = response.data.data;
@@ -475,7 +473,6 @@ export default {
       this.dialogGoodsListVisible = true
     },
     getAllRegion() {
-      let that = this
       this.axios.get('order/getAllRegion').then(response => {
         this.options = response.data.data
       })

@@ -5,7 +5,7 @@
         <img src="../static/images/loading2.gif" />
       </div>
       <div class="body">
-        <p class="tips">吉风小店</p>
+        <p class="tips">猪猪小店</p>
         <el-form ref="form" :model="form" :rules="rules" label-position="top">
           <el-form-item label="" prop="username">
             <el-input v-model="form.username" placeholder="用户名"></el-input>
@@ -104,18 +104,20 @@ export default {
 </script>
 <style>
 .login {
-  align-items: center;
-  background: url('http://cdn.jzzz66.cn/shopadminbg.jpg');
+  height: 100vh;
+  width: 100vw;
+  background: url('http://cdn.jzzz66.cn/shopadmin.jpg');
   /* 以上为登录背景,可以自己更换成自己喜欢的 */
-  background-size: 100% 100%;
+  background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   display: flex;
   font-family: Lato, Helvetica, sans-serif;
   justify-content: center;
+  align-items: center;
   text-align: center;
-  height: 100%;
-  width: 100%;
   color: #656565;
+  position: relative;
 }
 
 .login-box {

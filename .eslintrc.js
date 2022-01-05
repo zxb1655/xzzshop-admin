@@ -12,10 +12,10 @@ module.exports = {
     parser: 'babel-eslint'
   },
 
+  extends: ['plugin:vue/essential', 'eslint:recommended', '@vue/prettier'],
   rules: {
     'no-console': 'off',
-    'no-debugger': 'off'
-  },
-
-  extends: ['plugin:vue/essential', 'eslint:recommended', '@vue/prettier']
+    'no-debugger': 'off',
+    'no-unused-vars': 'off'
+  }
 }
